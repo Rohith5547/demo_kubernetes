@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: worker-app-pod
+  labels:
+    name: worker-app-pod
+    app: demo-voting-pod
+spec:
+  containers:
+    - name: worker-app
+      image: kodekloud/examplevotingapp_worker:v1
+      env:
+        # PostgreSQL Config
+        - name: POSTGRES_HOST
+          value: "postgres-pod"
+        - name: POSTGRES_USER
+          value: "postgres"
+        - name: POSTGRES_PASSWORD
+          value: "postgres"
+
+        # Redis Config (FIXED)
+        - name: REDIS_HOST
+          value: "redis-service"  # Using service name
+        - name: REDIS_PORT
+          value: "6379"
